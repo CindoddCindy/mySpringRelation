@@ -36,7 +36,7 @@ public class EmployeeController {
     }
 
     @GetMapping(path = "/employees", produces = "application/json")
-    public ResponseEntity<gitList<Employee>> getAllEmployees() {
+    public ResponseEntity<List<Employee>> getAllEmployees() {
         return new ResponseEntity<>(employeeService.getAllEmployee(), HttpStatus.OK);
     }
 }
