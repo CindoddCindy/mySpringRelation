@@ -1,34 +1,46 @@
 package myrelationonetoone.onetoonetest.service;
 
 import myrelationonetoone.onetoonetest.model.Employee;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+
+import myrelationonetoone.onetoonetest.repository.EmployeeRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService{
+
+    @Autowired
+    private EmployeeRepository employeeRepository;
+
     @Override
     public Employee createEmployee(Employee emp) {
-        return null;
+        return employeeRepository.save(emp);
     }
 
     @Override
     public Employee updateEmployee(Employee emp) {
-        return null;
+        return employeeRepository.save(emp);
     }
 
     @Override
     public Employee getEmployee(Long empId) {
+        Optional<Employee> optionalEmp = employeeRepository.findById(empId);
+        if (optionalEmp.isPresent()) {
+            return optionalEmp.get();
+        }
         return null;
     }
 
     @Override
     public void deleteEmployee(Long empId) {
-
+        employeeRepository.deleteById(empId);
     }
 
     @Override
     public List<Employee> getAllEmployee() {
-        return null;
+        return employeeRepository.findAll();
     }
 }
